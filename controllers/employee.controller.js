@@ -115,7 +115,7 @@ exports.update = async (req, res) => {
     return res.status(404).send({
       message: validator.error.details[0].message,
     });
-  const sameemployee = await Category.findOne({
+  const sameemployee = await Employees.findOne({
     _id: {
       $ne: req.params.id,
     },
