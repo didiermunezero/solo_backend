@@ -5,8 +5,6 @@ const dotenv = require("dotenv");
 // create express app
 const app = express();
 
-
-
 app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 require("./routes/users.router.js")(app);
+require("./routes/employees.router.js")(app);
 
 const dbConfig = require("./mongodb/index.js");
 const mongoose = require("mongoose");
@@ -35,8 +34,7 @@ mongoose
     process.exit();
   });
 
-  dotenv.config();
-  app.listen(process.env.PORT, () => {
-    console.log(`\nServer started at http://localhost:${process.env.PORT}`);
-  });
-  
+dotenv.config();
+app.listen(process.env.PORT, () => {
+  console.log(`\nServer started at http://localhost:${process.env.PORT}`);
+});
