@@ -34,6 +34,10 @@ const EmployeeSchema = mongoose.Schema(
       type: mongoose.Types.ObjectId,
       ref: "Type",
     },
+    password: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

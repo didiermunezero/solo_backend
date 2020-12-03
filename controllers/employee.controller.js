@@ -25,9 +25,13 @@ exports.create = async (req, res) => {
     email: req.body.email,
   });
   if (employee) {
-    return res.send("Email exists").status(400);
+    return res.send({ message: "Email exists" }).status(400);
   }
-  //Admin validation
+
+  const sectionSector = await Sectors.findOne({
+    _id: req.body.sector,
+  });
+  if (!sectionSector) return res.send({ message: "Sector not found" });
   const validator = schema.validate(req.body);
   if (validator.error) {
     console.log(validator.error.details[0].message);
@@ -44,7 +48,9 @@ exports.create = async (req, res) => {
     password: req.body.password,
     profile: req.body.profile,
     district: req.body.district,
-    sector: req.body.province,
+    sector: req.body.sector,
+    phone: req.body.phone,
+    employee_type: req.body.employee_type,
   });
 
   await create_one
@@ -156,16 +162,13 @@ exports.delete = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  var employee = await Employees.findOne({
-    $or: {
-      email: req.body.email,
-    },
+  var user = await Employees.findOne({
+    email: req.body.email,
   });
-  if (!employee) {
+  if (!user) {
     return res.send({ message: "invalid credentials" }).status(400);
   }
-
-  const isEqual = await bcrypt.compare(req.body.password, employee.password);
+  const isEqual = await bcrypt.compare(req.body.password, user.password);
 
   if (!isEqual) {
     return res.send({ message: "invalid credentials" }).status(400);
@@ -173,12 +176,11 @@ exports.login = async (req, res) => {
 
   const token = jwt.sign(
     {
-      employeeId: employee._id.toString(),
-      email: employee.email,
+      userId: user._id.toString(),
+      email: user.email,
     },
     "jwtencryptionkey",
     { expiresIn: "1h" }
   );
-  console.log(token);
-  return { token: token };
+  return res.send({ user: user, token: token }).status(200);
 };
