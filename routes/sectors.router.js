@@ -3,7 +3,6 @@ module.exports = (app) => {
 
   // Create a new sectors
   app.post("/sectors", sectors.create);
-  app.post("/sectors/login", sectors.login);
 
   // Retrieve all sectorss
   app.get("/sectors", sectors.findAll);
@@ -12,7 +11,7 @@ module.exports = (app) => {
   app.get("/sectors/:id", sectors.findOne);
 
   // Update a sectors with id
-  app.put("/sectors/:id", sectors.update);
+  app.get("/sectors/district/:district", sectors.findByDistrict);
 
   // Delete a sectors by id
   app.delete("/sectors/:id", sectors.delete);

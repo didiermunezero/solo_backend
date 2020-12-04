@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 require("./routes/users.router.js")(app);
 require("./routes/employees.router.js")(app);
+require("./routes/sectors.router.js")(app);
 
 const dbConfig = require("./mongodb/index.js");
 const mongoose = require("mongoose");

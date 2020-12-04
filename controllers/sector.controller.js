@@ -36,44 +36,44 @@ exports.create = async (req, res) => {
     });
 };
 
-exports.getAll()=(req,res)=>{
-    await Sectors.find()
-    .then((data)=>{
-        res.status(200).send(data);
+exports.findAll = async (req, res) => {
+  await Sectors.find()
+    .then((data) => {
+      res.status(200).send(data);
     })
-    .catch((err)=>{
-        res.status(400).send({"message":"Error Occurred"})
-    })
-}
+    .catch((err) => {
+      res.status(400).send({ message: "Error Occurred" });
+    });
+};
 
-exports.findByDistrict=(req,res)=>{
-    await Sectors.find({district: req.params.district})
-    .then(data=>{
-        res.status(200).send(data)
+exports.findByDistrict = async (req, res) => {
+  await Sectors.find({ district: req.params.district })
+    .then((data) => {
+      res.status(200).send(data);
     })
-    .then((err)=>{
-        res.status(400).send({"message":"Error Occurred"})
-    })
-}
+    .then((err) => {
+      res.status(400).send({ message: "Error Occurred" });
+    });
+};
 
-exports.findOne = (res,req)=>{
-    await Sectors.findOne({_id: req.params.id})
-    .then((data)=>{
-        res.status(200).send(data)
+exports.findOne = async (res, req) => {
+  await Sectors.findOne({ _id: req.params.id })
+    .then((data) => {
+      res.status(200).send(data);
     })
-    .catch((err)=>{
-        res.status(400).send({"message":"Error Occurred"})
-    })
-}
+    .catch((err) => {
+      res.status(400).send({ message: "Error Occurred" });
+    });
+};
 
-exports.update=(req,res)=>{
-    await Sectors.findByIdAndRemove(req.params.id)
-    .then((sector)=>{
-        if(!sector){
-            res.status(200).send({"message":"Sector removed"})
-        }
+exports.delete = async (req, res) => {
+  await Sectors.findByIdAndRemove(req.params.id)
+    .then((sector) => {
+      if (!sector) {
+        res.status(200).send({ message: "Sector removed" });
+      }
     })
-    .catch((err)=>{
-        res.status(400).send({"message": "Error Occurred"})
-    })
-}
+    .catch((err) => {
+      res.status(400).send({ message: "Error Occurred" });
+    });
+};
