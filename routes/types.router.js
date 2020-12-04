@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const types = require("../controllers/sector.controller.js");
+  const types = require("../controllers/types.controller.js");
 
   // Create a new types
   app.post("/types", types.create);
@@ -8,6 +8,7 @@ module.exports = (app) => {
   app.get("/types", types.findAll);
 
   // Retrieve a single types by id
+
   app.get("/types/:id", types.findOne);
 
   // Update a types with id
