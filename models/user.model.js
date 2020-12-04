@@ -16,13 +16,12 @@ const UserSchema = mongoose.Schema(
     },
     profile: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
       required: true,
     },
-    province: {
+    sector: {
       type: String,
       required: true,
     },

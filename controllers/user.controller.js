@@ -9,7 +9,8 @@ const schema = Joi.object().keys({
   gender: Joi.string().min(4).max(6).required(),
   phone: Joi.string().min(10).max(14).required(),
   district: Joi.string().min(3).max(30).required(),
-  province: Joi.string().min(4).max(6).required(),
+  sector: Joi.string().min(24).max(24).required(),
+  policy: Joi.boolean(),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
     .required(),
@@ -43,7 +44,7 @@ exports.create = async (req, res) => {
     password: req.body.password,
     profile: req.body.profile,
     district: req.body.district,
-    province: req.body.province,
+    sector: req.body.sector,
   });
 
   await create_one
@@ -153,6 +154,7 @@ exports.delete = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
+  console.log(req.body);
   var user = await Users.findOne({
     email: req.body.email,
   });
