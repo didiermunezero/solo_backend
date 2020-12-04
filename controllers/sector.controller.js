@@ -55,3 +55,25 @@ exports.findByDistrict=(req,res)=>{
         res.status(400).send({"message":"Error Occurred"})
     })
 }
+
+exports.findOne = (res,req)=>{
+    await Sectors.findOne({_id: req.params.id})
+    .then((data)=>{
+        res.status(200).send(data)
+    })
+    .catch((err)=>{
+        res.status(400).send({"message":"Error Occurred"})
+    })
+}
+
+exports.update=(req,res)=>{
+    await Sectors.findByIdAndRemove(req.params.id)
+    .then((sector)=>{
+        if(!sector){
+            res.status(200).send({"message":"Sector removed"})
+        }
+    })
+    .catch((err)=>{
+        res.status(400).send({"message": "Error Occurred"})
+    })
+}
