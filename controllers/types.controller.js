@@ -46,16 +46,6 @@ exports.findAll = async (req, res) => {
     });
 };
 
-exports.findByDistrict = async (req, res) => {
-  await Types.find({ district: req.params.district })
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .then((err) => {
-      res.status(400).send({ message: "Error Occurred" });
-    });
-};
-
 exports.findOne = async (res, req) => {
   await Types.findOne({ _id: req.params.id })
     .then((data) => {
