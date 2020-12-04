@@ -20,7 +20,13 @@ const schema = Joi.object().keys({
 });
 
 exports.create = async (req, res) => {
-  console.log(req.body);
+  const validator = schema.validate(req.body);
+  if (validator.error) {
+    console.log(validator.error.details[0].message);
+    return res.status(200).send({
+      message: validator.error.details[0].message,
+    });
+  }
   var employee = await Employees.findOne({
     email: req.body.email,
   });
@@ -32,13 +38,6 @@ exports.create = async (req, res) => {
     _id: req.body.sector,
   });
   if (!sectionSector) return res.send({ message: "Sector not found" });
-  const validator = schema.validate(req.body);
-  if (validator.error) {
-    console.log(validator.error.details[0].message);
-    return res.status(200).send({
-      message: validator.error.details[0].message,
-    });
-  }
   req.body.password = await bcrypt.hash(req.body.password, 12);
   const create_one = new Employees({
     fname: req.body.fname,
