@@ -37,7 +37,7 @@ exports.create = async (req, res) => {
   const sectionSector = await Sectors.findOne({
     _id: req.body.sector,
   });
-  if (!sectionSector) return res.send({ message: "Sector not found" });
+  if (!sectionSector) res.send({ message: "Sector not found" });
   req.body.password = await bcrypt.hash(req.body.password, 12);
   const create_one = new Employees({
     fname: req.body.fname,
