@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
     email: req.body.email,
   });
   if (employee) {
-    return res.send({ message: "Email exists" }).status(400);
+    res.send({ message: "Email exists" }).status(400);
   }
 
   const sectionSector = await Sectors.findOne({
