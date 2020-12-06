@@ -2,7 +2,7 @@ const Sectors = require("../models/sector.model");
 const Joi = require("joi");
 
 const schema = Joi.object().keys({
-  name: Joi.string().max(20).min(4).required(),
+  sector: Joi.string().max(20).min(4).required(),
   district: Joi.string().max(24).min(24).required(true),
 });
 
@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
     });
   }
   const exists = await Sectors.findOne({
-    name: req.body.name,
+    sector: req.body.name,
     district: req.body.district,
   });
   if (exists) {
