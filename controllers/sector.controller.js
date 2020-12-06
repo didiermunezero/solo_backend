@@ -3,13 +3,13 @@ const Joi = require("joi");
 
 const schema = Joi.object().keys({
   sector: Joi.string().max(20).min(4).required(),
-  district: Joi.string().max(24).min(24).required(true),
+  district: Joi.string().max(4).min(15).required(true),
 });
 
 exports.create = async (req, res) => {
   const validator = schema.validate(req.body);
   if (validator.error) {
-    return res.status(400).send({
+    return res.status(200).send({
       message: validator.error.details[0].message,
     });
   }
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
     district: req.body.district,
   });
   if (exists) {
-    res.status(400).send({ message: "Sector exists already" });
+    res.status(200).send({ message: "Sector exists already" });
   }
 
   const create_one = new Sectors(req.body);
@@ -42,7 +42,7 @@ exports.findAll = async (req, res) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      res.status(400).send({ message: "Error Occurred" });
+      res.status(200).send({ message: "Error Occurred" });
     });
 };
 
@@ -52,7 +52,7 @@ exports.findByDistrict = async (req, res) => {
       res.status(200).send(data);
     })
     .then((err) => {
-      res.status(400).send({ message: "Error Occurred" });
+      res.status(200).send({ message: "Error Occurred" });
     });
 };
 
@@ -62,7 +62,7 @@ exports.findOne = async (res, req) => {
       res.status(200).send(data);
     })
     .catch((err) => {
-      res.status(400).send({ message: "Error Occurred" });
+      res.status(200).send({ message: "Error Occurred" });
     });
 };
 
@@ -74,6 +74,6 @@ exports.delete = async (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(400).send({ message: "Error Occurred" });
+      res.status(200).send({ message: "Error Occurred" });
     });
 };
