@@ -24,3 +24,5 @@ SectorSchema.virtual("district", {
   foreignField: "_id",
   justOne: true,
 });
+
+module.exports = mongoose.model("Sector", SectorSchema);
