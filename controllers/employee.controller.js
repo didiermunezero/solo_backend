@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
   const validator = schema.validate(req.body);
   if (validator.error) {
     console.log(validator.error.details[0].message);
-    return res.status(200).send({
+    return res.status(400).send({
       message: validator.error.details[0].message,
     });
   }
@@ -106,7 +106,7 @@ exports.update = async (req, res) => {
     _id: req.params.id,
   });
   if (!existingemployee) {
-    return res.send({ message: "employee not found" });
+    res.send({ message: "employee not found" });
   }
   //validate employee
   const validator = schema.validate(req.body);
