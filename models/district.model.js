@@ -6,7 +6,7 @@ const DistrictSchema = mongoose.Schema({
     required: true,
   },
   province: {
-    type: String,
+    type: Number,
     required: true,
   },
 });
