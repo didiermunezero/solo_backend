@@ -2,8 +2,8 @@ const Districts = require("../models/district.model");
 const Joi = require("joi");
 
 const schema = Joi.object().keys({
-  name: Joi.string().max(20).min(4).required(),
-  district: Joi.string().max(24).min(24).required(true),
+  province: Joi.string().max(20).min(4).required(),
+  district: Joi.string().max(3).min(15).required(true),
 });
 
 exports.create = async (req, res) => {
@@ -14,8 +14,8 @@ exports.create = async (req, res) => {
     });
   }
   const exists = await Districts.findOne({
-    name: req.body.name,
     district: req.body.district,
+    province: req.body.province,
   });
   if (exists) {
     res.status(400).send({ message: "district exists already" });
