@@ -1,4 +1,4 @@
-const Sectors = require("../models/sector.model");
+const Districts = require("../models/district.model");
 const Joi = require("joi");
 
 const schema = Joi.object().keys({
@@ -13,15 +13,15 @@ exports.create = async (req, res) => {
       message: validator.error.details[0].message,
     });
   }
-  const exists = await Sectors.findOne({
+  const exists = await Districts.findOne({
     name: req.body.name,
     district: req.body.district,
   });
   if (exists) {
-    res.status(400).send({ message: "Sector exists already" });
+    res.status(400).send({ message: "district exists already" });
   }
 
-  const create_one = new Sectors(req.body);
+  const create_one = new Districts(req.body);
 
   await create_one
     .save()
@@ -37,7 +37,7 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  await Sectors.find()
+  await Districts.find()
     .then((data) => {
       res.status(200).send(data);
     })
@@ -47,7 +47,7 @@ exports.findAll = async (req, res) => {
 };
 
 exports.findByDistrict = async (req, res) => {
-  await Sectors.find({ district: req.params.district })
+  await Districts.find({ district: req.params.district })
     .then((data) => {
       res.status(200).send(data);
     })
@@ -57,7 +57,7 @@ exports.findByDistrict = async (req, res) => {
 };
 
 exports.findOne = async (res, req) => {
-  await Sectors.findOne({ _id: req.params.id })
+  await Districts.findOne({ _id: req.params.id })
     .then((data) => {
       res.status(200).send(data);
     })
@@ -67,10 +67,10 @@ exports.findOne = async (res, req) => {
 };
 
 exports.delete = async (req, res) => {
-  await Sectors.findByIdAndRemove(req.params.id)
-    .then((sector) => {
-      if (!sector) {
-        res.status(200).send({ message: "Sector removed" });
+  await Districts.findByIdAndRemove(req.params.id)
+    .then((district) => {
+      if (!district) {
+        res.status(200).send({ message: "district removed" });
       }
     })
     .catch((err) => {
