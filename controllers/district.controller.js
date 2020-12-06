@@ -9,16 +9,18 @@ const schema = Joi.object().keys({
 exports.create = async (req, res) => {
   const validator = schema.validate(req.body);
   if (validator.error) {
-    return res.status(200).send({
+    res.send({
       message: validator.error.details[0].message,
     });
+    return;
   }
   const exists = await Districts.findOne({
     district: req.body.district,
     province: req.body.province,
   });
   if (exists) {
-    res.status(200).send({ message: "district exists already" });
+    res.send({ message: "district exists already" });
+    return;
   }
 
   const create_one = new Districts(req.body);
@@ -39,7 +41,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   await Districts.find()
     .then((data) => {
-      res.status(200).send(data);
+      res.send(data);
     })
     .catch((err) => {
       res.status(200).send({ message: "Error Occurred" });
