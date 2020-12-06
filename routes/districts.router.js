@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const districts = require("../controllers/sector.controller.js");
+    const districts = require("../controllers/district.controller.js");
   
     // Create a new districts
     app.post("/districts", districts.create);
