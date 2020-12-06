@@ -2,7 +2,7 @@ const Districts = require("../models/district.model");
 const Joi = require("joi");
 
 const schema = Joi.object().keys({
-  province: Joi.string().max(20).min(4).required(),
+  province: Joi.number().max(5).min(1).required(),
   district: Joi.string().max(15).min(4).required(true),
 });
 
