@@ -15,6 +15,7 @@ require("./routes/users.router.js")(app);
 require("./routes/employees.router.js")(app);
 require("./routes/sectors.router.js")(app);
 require("./routes/types.router.js")(app);
+require("./routes/districts.router.js")(app);
 
 const dbConfig = require("./mongodb/index.js");
 const mongoose = require("mongoose");
