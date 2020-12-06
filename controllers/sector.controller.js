@@ -3,7 +3,7 @@ const Joi = require("joi");
 
 const schema = Joi.object().keys({
   sector: Joi.string().max(20).min(4).required(),
-  district: Joi.string().max(15).min(4).required(true),
+  district: Joi.string().max(24).min(24).required(true),
 });
 
 exports.create = async (req, res) => {
