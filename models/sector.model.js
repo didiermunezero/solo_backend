@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const SectorSchema = mongoose.Schema(
   {
-    name: {
+    sector: {
       type: String,
       required: true,
     },
-    district_id: {
+    district: {
       type: mongoose.Types.ObjectId,
       ref: "District",
       required: true,
@@ -18,9 +18,9 @@ const SectorSchema = mongoose.Schema(
   }
 );
 
-SectorSchema.virtual("district", {
+SectorSchema.virtual("districts", {
   ref: "District",
-  localField: "district_id",
+  localField: "district",
   foreignField: "_id",
   justOne: true,
 });
