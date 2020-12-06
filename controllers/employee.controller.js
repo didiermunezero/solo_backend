@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
   const validator = schema.validate(req.body);
   if (validator.error) {
     console.log(validator.error.details[0].message);
-    return res.status(400).send({
+    return res.status(200).send({
       message: validator.error.details[0].message,
     });
   }
