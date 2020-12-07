@@ -38,6 +38,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   await Sectors.find()
+  .populate("districts")
     .then((data) => {
       res.status(200).send(data);
     })
