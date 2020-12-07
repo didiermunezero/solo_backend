@@ -13,7 +13,7 @@ const schema = Joi.object().keys({
   employee_type: Joi.string().min(24).max(24).required(),
   email: Joi.string().email({
     minDomainSegments: 2,
-    tlds: { allow: ["com", "net"] },
+    tlds: { allow: ["com", "net", "fr", "rw", "inc"] },
   }),
   password: Joi.string().min(10).max(14).required(),
   profile: Joi.string().min(20).max(50),
