@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const DistrictSchema = mongoose.Schema({
-  name: {
+  district: {
     type: String,
     required: true,
   },
   province: {
-    type: String,
+    type: Number,
     required: true,
   },
 });
