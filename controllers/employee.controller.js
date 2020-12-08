@@ -1,4 +1,5 @@
 const Employees = require("../models/employee.model");
+const Sectors = require("../models/sector.model");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -17,6 +18,7 @@ const schema = Joi.object().keys({
   }),
   password: Joi.string().min(10).max(14).required(),
   profile: Joi.string().min(20).max(50),
+  policy: Joi.boolean(),
 });
 
 exports.create = async (req, res) => {
