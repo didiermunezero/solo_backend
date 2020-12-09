@@ -12,7 +12,10 @@ const schema = Joi.object().keys({
   sector: Joi.string().min(24).max(24).required(),
   policy: Joi.boolean(),
   email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net", "inc", "fr", "rw"] },
+    })
     .required(),
   password: Joi.string().min(10).max(14).required(),
   profile: Joi.string().min(20).max(50),
