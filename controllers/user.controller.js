@@ -77,6 +77,7 @@ exports.findAll = async (req, res) => {
 
 exports.findOne = async (req, res) => {
   await Users.findById(req.params.id)
+    .populate("sectors")
     .then((user) => {
       if (!user) {
         return res.status(404).send({
