@@ -167,12 +167,12 @@ exports.login = async (req, res) => {
     email: req.body.email,
   });
   if (!user) {
-    return res.send({ message: "invalid credentials" }).status(400);
+    return res.send({ message: "invalid email" }).status(400);
   }
   const isEqual = await bcrypt.compare(req.body.password, user.password);
 
   if (!isEqual) {
-    return res.send({ message: "invalid credentials" }).status(400);
+    return res.send({ message: "invalid password" }).status(400);
   }
 
   const token = jwt.sign(
