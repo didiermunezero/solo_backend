@@ -47,7 +47,7 @@ exports.create = async (req, res) => {
     gender: req.body.gender,
     email: req.body.email,
     password: req.body.password,
-    profile: req.body.profile,
+    profile: "avatar.jpg",
     district: req.body.district,
     sector: req.body.sector,
     phone: req.body.phone,
@@ -60,7 +60,7 @@ exports.create = async (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      console.log("error occurred while creating the employee");
+      console.log(err);
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the employee.",
