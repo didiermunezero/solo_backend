@@ -99,6 +99,12 @@ exports.findOne = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+  var ObjectId = require("mongoose").Types.ObjectId;
+  if (!ObjectId.isValid(req.params.id)) {
+    res.send({ message: "Not an id" });
+    return;
+  }
+  console.log(req.body);
   const existingUser = await Users.findOne({
     _id: req.params.id,
   });
