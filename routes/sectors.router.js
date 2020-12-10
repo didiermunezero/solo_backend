@@ -4,7 +4,7 @@ module.exports = (app) => {
   // Create a new sectors
   app.post("/sectors", sectors.create);
 
-  // Retrieve all sectorss
+  // Retrieve all sectors
   app.get("/sectors", sectors.findAll);
 
   // Retrieve a single sectors by id

@@ -22,7 +22,8 @@ const UserSchema = mongoose.Schema(
       required: true,
     },
     sector: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: "Sector",
       required: true,
     },
     district: {
@@ -40,7 +41,16 @@ const UserSchema = mongoose.Schema(
   },
   {
     timestamps: true,
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
-
+UserSchema.virtual("sectors", {
+  ref: "Sector",
+  localField: "sector",
+  foreignField: "_id",
+  justOne: true,
+});
 module.exports = mongoose.model("User", UserSchema);

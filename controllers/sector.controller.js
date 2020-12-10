@@ -38,7 +38,6 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   await Sectors.find()
-  .populate("districts")
     .then((data) => {
       res.status(200).send(data);
     })
@@ -58,7 +57,7 @@ exports.findByDistrict = async (req, res) => {
 };
 
 exports.findOne = async (res, req) => {
-  await Sectors.findOne({ _id: req.params.id })
+  await Sectors.find()
     .then((data) => {
       res.status(200).send(data);
     })
