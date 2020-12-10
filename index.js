@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const fileUpload = require("express-fileupload");
+
 // create express app
 const app = express();
 
@@ -10,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
-
+app.use(fileUpload());
 require("./routes/users.router.js")(app);
 require("./routes/employees.router.js")(app);
 require("./routes/sectors.router.js")(app);
