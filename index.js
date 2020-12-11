@@ -21,6 +21,7 @@ require("./routes/districts.router.js")(app);
 
 const dbConfig = require("./mongodb/index.js");
 const mongoose = require("mongoose");
+dotenv.config();
 
 mongoose.Promise = global.Promise;
 
@@ -32,14 +33,12 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => {
-    console.log("Successfully connected to the database\n");
+    console.log("\nSuccessfully connected to the database");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server started at http://localhost:${process.env.PORT}\n`);
+    });
   })
   .catch((err) => {
     console.log("Could not connect to the database. Exiting now...", err);
     process.exit();
   });
-
-dotenv.config();
-app.listen(process.env.PORT, () => {
-  console.log(`\nServer started at http://localhost:${process.env.PORT}`);
-});
