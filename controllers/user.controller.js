@@ -182,6 +182,8 @@ exports.login = async (req, res) => {
     {
       userId: user._id.toString(),
       email: user.email,
+      fname: user.fname,
+      lname: user.lname,
     },
     "jwtencryptionkey",
     { expiresIn: "1h" }

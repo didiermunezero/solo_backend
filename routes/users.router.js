@@ -16,4 +16,6 @@ module.exports = (app) => {
 
   // Delete a users by id
   app.delete("/users/:id", users.delete);
+
+  app.put("/users/upload/profile", users.upload);
 };
